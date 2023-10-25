@@ -15,7 +15,19 @@ services:
       - ./.envs/.mysql
     volumes:
       - ./practical_web_development-main/:/code
+      - ./practical_web_development-main/static:/static
     ports:
       - "8080:8080"
     depends_on:
       - db
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./practical_web_development-main/static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+volumes:
+  static:
